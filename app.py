@@ -1,9 +1,7 @@
 from flask import Flask, json
-#render_template, url_for
 from flask_sqlalchemy import  SQLAlchemy
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-#from youtube.youtube_search import Youtube_search
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app_db.db'
@@ -95,7 +93,7 @@ def show_video_details(video_id):
     try:
         video = Favorite_video.query.get(video_id)
         print("id: " + video.id + "; title: " + video.title)
-        print("date: " + str(video.date) + "; picture: ")
+        print("date: " + str(video.date))
     except:
         return "Ошибка при просмотре данных! Проверьте id видео"
     return "Работает, смотрите в командной строке"
@@ -131,7 +129,7 @@ def delete_video(video_id):
         video = Favorite_video.query.get(video_id)
         print('\nИз "Понравившихся" удалено видео с параметрами:')
         print("id: " + video.id + "; title: " + video.title)
-        print("date: " + str(video.date) + "; picture: ")
+        print("date: " + str(video.date) + ";")
         db.session.delete(video)
         db.session.commit()
         print()
